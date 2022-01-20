@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Trigger from 'rc-trigger';
-import moment from 'moment';
+import dayjs from './dayjs';
 import classNames from 'classnames';
 import Panel from './Panel';
 import placements from './placements';
@@ -23,7 +23,7 @@ class Picker extends Component {
     popupClassName: '',
     popupStyle: {},
     align: {},
-    defaultOpenValue: moment(),
+    defaultOpenValue: dayjs(),
     allowEmpty: true,
     showHour: true,
     showMinute: true,
@@ -318,7 +318,7 @@ class Picker extends Component {
             autoComplete={autoComplete}
             onFocus={onFocus}
             onBlur={onBlur}
-            autoFocus={autoFocus} // eslint-disable-line jsx-a11y/no-autofocus
+            autoFocus={autoFocus}
             onChange={noop}
             readOnly={!!inputReadOnly}
             id={id}

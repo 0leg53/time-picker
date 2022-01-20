@@ -1,9 +1,12 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { mount } from 'enzyme';
-import moment from 'moment';
+import Adapter from 'enzyme-adapter-react-16';
+import { mount, configure } from 'enzyme';
+import dayjs from '../src/dayjs';
 import TimePicker from '../src/TimePicker';
 import { clickInput, clickSelectItem, matchValue } from './util';
+
+configure({adapter: new Adapter()});
 
 describe('TimePicker', () => {
   let container;
@@ -16,7 +19,7 @@ describe('TimePicker', () => {
       <TimePicker
         format={format}
         showSecond={showSecond}
-        defaultValue={moment('12:57:58', format)}
+        defaultValue={dayjs('12:57:58', format)}
         {...props}
       />,
       options,
@@ -31,7 +34,7 @@ describe('TimePicker', () => {
       <TimePicker
         format={format}
         showSecond={showSecond}
-        defaultValue={moment('08:24', format)}
+        defaultValue={dayjs('08:24', format)}
         {...props}
       />,
     );

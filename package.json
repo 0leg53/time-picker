@@ -33,15 +33,21 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "2.x",
+    "dayjs": "^1.10.7",
     "moment": "2.x",
     "raf": "^3.4.1",
     "rc-trigger": "^4.0.0-alpha.8"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
     "cross-env": "^7.0.0",
     "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.4.0",
-    "father": "^2.24.1",
+    "father": "^2.30.13",
+    "jest": "^27.4.7",
     "np": "^6.0.0",
     "rc-util": "^5.1.0"
   },
@@ -56,7 +62,7 @@
     "gh-pages": "npm run build && father doc deploy",
     "prepublishOnly": "npm run compile && np --yolo --no-publish",
     "lint": "eslint src/ examples/ --ext .tsx,.ts,.jsx,.js",
-    "test": "father test",
+    "test": "jest",
     "coverage": "father test --coverage",
     "now-build": "npm run build"
   }

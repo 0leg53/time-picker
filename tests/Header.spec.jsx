@@ -1,10 +1,13 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import KeyCode from 'rc-util/lib/KeyCode';
-import { mount } from 'enzyme';
-import moment from 'moment';
+import Adapter from 'enzyme-adapter-react-16';
+import { mount, configure } from 'enzyme';
+import dayjs from '../src/dayjs';
 import TimePicker from '../src/TimePicker';
 import { findHeader, clickInput, blurInput, matchAll } from './util';
+
+configure({adapter: new Adapter()});
 
 describe('Header', () => {
   let container;
@@ -16,7 +19,7 @@ describe('Header', () => {
       <TimePicker
         format={format}
         showSecond={showSecond}
-        defaultValue={moment('01:02:03', format)}
+        defaultValue={dayjs('01:02:03', format)}
         {...props}
       />,
     );

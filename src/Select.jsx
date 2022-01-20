@@ -1,4 +1,3 @@
-/* eslint jsx-a11y/no-noninteractive-element-to-interactive-role: 0 */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import raf from 'raf';

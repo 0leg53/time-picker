@@ -1,3 +1,4 @@
 module.exports = {
-  snapshotSerializers: [require.resolve('enzyme-to-json/serializer')],
+  snapshotSerializers: [require.resolve("enzyme-to-json/serializer")],
+  testEnvironment: "jsdom",
 };

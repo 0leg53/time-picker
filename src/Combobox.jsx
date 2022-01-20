@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from './Select';
+import dayjs from './dayjs';
 
 const formatOption = (option, disabledOptions) => {
   let value = `${option}`;
@@ -28,36 +29,35 @@ class Combobox extends Component {
       isAM,
       onAmPmChange,
     } = this.props;
-    const value = (propValue || defaultOpenValue).clone();
-
+    let value = dayjs(propValue || dayjs())
     if (type === 'hour') {
       if (use12Hours) {
         if (isAM) {
-          value.hour(+itemValue % 12);
+          value = value.hour(+itemValue % 12);
         } else {
-          value.hour((+itemValue % 12) + 12);
+          value = value.hour((+itemValue % 12) + 12);
         }
       } else {
-        value.hour(+itemValue);
+        value = value.hour(+itemValue);
       }
     } else if (type === 'minute') {
-      value.minute(+itemValue);
+     value = value.minute(+itemValue);
     } else if (type === 'ampm') {
       const ampm = itemValue.toUpperCase();
       if (use12Hours) {
         if (ampm === 'PM' && value.hour() < 12) {
-          value.hour((value.hour() % 12) + 12);
+          value = value.hour((value.hour() % 12) + 12);
         }
 
         if (ampm === 'AM') {
           if (value.hour() >= 12) {
-            value.hour(value.hour() - 12);
+            value = value.hour(value.hour() - 12);
           }
         }
       }
       onAmPmChange(ampm);
     } else {
-      value.second(+itemValue);
+      value = value.second(+itemValue);
     }
     onChange(value);
   };
