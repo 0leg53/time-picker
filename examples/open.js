@@ -1,7 +1,7 @@
 /* eslint no-console:0 */
 import '../assets/index.less';
 import React from 'react';
-import moment from 'moment';
+import dayjs from '../src/dayjs';
 import TimePicker from '..';
 
 const iconStyle = {
@@ -108,7 +108,7 @@ class App extends React.Component {
           style={{
             position: 'relative',
           }}
-          defaultValue={moment('01:02:04', 'HH:mm:ss')}
+          defaultValue={dayjs('01:02:04', 'HH:mm:ss')}
           open={open}
           onOpen={this.setOpen}
           onClose={this.setOpen}

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import dayjs from "./dayjs";
-import classNames from "classnames";
+import React, { Component } from 'react';
+import dayjs from './dayjs';
+import classNames from 'classnames';
 
 class Header extends Component {
   static defaultProps = {
@@ -11,7 +11,7 @@ class Header extends Component {
     super(props);
     const { value, format } = props;
     this.state = {
-      str: (value && value.format(format)) || "",
+      str: (value && value.format(format)) || '',
       invalid: false,
     };
   }
@@ -35,7 +35,7 @@ class Header extends Component {
     if (value !== prevProps.value) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
-        str: (value && value.format(format)) || "",
+        str: (value && value.format(format)) || '',
         invalid: false,
       });
     }
@@ -64,25 +64,20 @@ class Header extends Component {
     } = this.props;
 
     if (str) {
+      console.log(str);
       const { value: originalValue } = this.props;
-      let value = dayjs((this.props.value &&this.props.value.isValid()) || this.props.defaultOpenValue);
-      if (str.length !== format.length) {
-        this.setState({
-          invalid: true,
-        });
-        return;
-      }
+      let value = dayjs(
+        this.props.value?.isValid() ? this.props.value : this.props.defaultOpenValue,
+      );
       const parsed = dayjs(str, format, true);
+      console.log(parsed);
       if (!parsed || !parsed.isValid()) {
         this.setState({
           invalid: true,
         });
         return;
       }
-      value = value
-        .hour(parsed.hour())
-        .minute(parsed.minute())
-        .second(parsed.second());
+      value = value.hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
       // if time value not allowed, response warning.
       if (
         hourOptions.indexOf(value.hour()) < 0 ||
@@ -98,17 +93,11 @@ class Header extends Component {
       // if time value is disabled, response warning.
       const disabledHourOptions = disabledHours();
       const disabledMinuteOptions = disabledMinutes(value.hour());
-      const disabledSecondOptions = disabledSeconds(
-        value.hour(),
-        value.minute()
-      );
+      const disabledSecondOptions = disabledSeconds(value.hour(), value.minute());
       if (
-        (disabledHourOptions &&
-          disabledHourOptions.indexOf(value.hour()) >= 0) ||
-        (disabledMinuteOptions &&
-          disabledMinuteOptions.indexOf(value.minute()) >= 0) ||
-        (disabledSecondOptions &&
-          disabledSecondOptions.indexOf(value.second()) >= 0)
+        (disabledHourOptions && disabledHourOptions.indexOf(value.hour()) >= 0) ||
+        (disabledMinuteOptions && disabledMinuteOptions.indexOf(value.minute()) >= 0) ||
+        (disabledSecondOptions && disabledSecondOptions.indexOf(value.second()) >= 0)
       ) {
         this.setState({
           invalid: true,
@@ -117,16 +106,19 @@ class Header extends Component {
       }
 
       if (originalValue) {
+        console.log('originalValue', originalValue);
         if (
           originalValue.hour() !== value.hour() ||
           originalValue.minute() !== value.minute() ||
           originalValue.second() !== value.second()
         ) {
           // keep other fields for rc-calendar
-          const changedValue = originalValue.clone();
-          changedValue.hour(value.hour());
-          changedValue.minute(value.minute());
-          changedValue.second(value.second());
+          let changedValue = dayjs(originalValue);
+          console.log('changedValue', changedValue);
+          changedValue = changedValue
+            .hour(value.hour())
+            .minute(value.minute())
+            .second(value.second());
           onChange(changedValue);
         }
       } else if (originalValue !== value) {
@@ -153,7 +145,7 @@ class Header extends Component {
   getInput() {
     const { prefixCls, placeholder, inputReadOnly } = this.props;
     const { invalid, str } = this.state;
-    const invalidClass = invalid ? `${prefixCls}-input-invalid` : "";
+    const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (
       <input
         className={classNames(`${prefixCls}-input`, invalidClass)}
