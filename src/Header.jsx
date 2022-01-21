@@ -64,13 +64,11 @@ class Header extends Component {
     } = this.props;
 
     if (str) {
-      console.log(str);
       const { value: originalValue } = this.props;
       let value = dayjs(
         this.props.value?.isValid() ? this.props.value : this.props.defaultOpenValue,
       );
       const parsed = dayjs(str, format, true);
-      console.log(parsed);
       if (!parsed || !parsed.isValid()) {
         this.setState({
           invalid: true,
@@ -106,7 +104,6 @@ class Header extends Component {
       }
 
       if (originalValue) {
-        console.log('originalValue', originalValue);
         if (
           originalValue.hour() !== value.hour() ||
           originalValue.minute() !== value.minute() ||
@@ -114,7 +111,6 @@ class Header extends Component {
         ) {
           // keep other fields for rc-calendar
           let changedValue = dayjs(originalValue);
-          console.log('changedValue', changedValue);
           changedValue = changedValue
             .hour(value.hour())
             .minute(value.minute())
